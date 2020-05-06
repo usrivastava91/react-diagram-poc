@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import createEngine, {
+  DefaultLinkModel,
+  DefaultNodeModel,
+  DiagramModel,
+} from "@projectstorm/react-diagrams";
 
+import { CanvasWidget } from "@projectstorm/react-canvas-core";
+import { Application } from "./Application";
+import { BodyWidget } from "./BodyWidget";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  // create an instance of the engine with all the defaults
+  const app = new Application();
 
+  return <BodyWidget app={app} />;
+}
 export default App;

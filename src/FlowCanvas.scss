@@ -1,0 +1,10 @@
+.flowContainer {
+  display: flex;
+  flex-direction: row;
+  .canvasContainer {
+    > div:first-child {
+      width: 80vw;
+      height: 450px;
+    }
+  }
+}
