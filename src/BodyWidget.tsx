@@ -9,6 +9,7 @@ import { Application } from "./Application";
 import { TrayItemWidget } from "./TrayItemWidget";
 
 import "./FlowCanvas.scss";
+import { ConcatNodeModel } from "./ConcatNodeModel";
 
 export interface BodyWidgetProps {
   app: Application;
@@ -46,7 +47,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
               color="#4DB6AC"
             />
             <TrayItemWidget
-              model={{ type: "both", name: "Concat" }}
+              model={{ type: "concat", name: "Concat" }}
               name="Concat"
               color="#4DB6AC"
             />
@@ -94,6 +95,9 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
                   node.addOutPort("Out");
                   break;
 
+                case "concat":
+                  node = new ConcatNodeModel();
+                  break;
                 default:
                   break;
               }

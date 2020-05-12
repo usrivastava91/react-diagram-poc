@@ -4,6 +4,10 @@ import createEngine, {
   DiagramEngine,
   PortModelAlignment,
 } from "@projectstorm/react-diagrams";
+import { ConcatNodeFactory } from "./ConcatNodeFactory";
+import { ConcatPortModel } from "./ConcatPortModel";
+import { SimplePortFactory } from "./SimplePortFactory";
+
 export class Application {
   protected activeModel: DiagramModel;
   protected diagramEngine: DiagramEngine;
@@ -31,6 +35,23 @@ export class Application {
   public newModel() {
     this.diagramEngine.setModel(this.activeModel);
 
+    /**
+     * registering concat node factory
+     */
+
+    this.diagramEngine
+      .getPortFactories()
+      .registerFactory(
+        new SimplePortFactory(
+          "concat",
+          (config) => new ConcatPortModel(PortModelAlignment.LEFT)
+        )
+      );
+
+    this.diagramEngine
+      .getNodeFactories()
+      .registerFactory(new ConcatNodeFactory());
+
     // Creating default nodes for the fields recieved from the ATS
     this.operators.map((operator, index) => {
       let inputNode = new DefaultNodeModel(`${operator}`, "rgb(0,192,255)");
@@ -43,7 +64,6 @@ export class Application {
         inputNode.getPosition().x + 500,
         inputNode.getPosition().y
       );
-
       this.activeModel.addNode(inputNode);
       this.activeModel.addNode(outputNode);
     });
