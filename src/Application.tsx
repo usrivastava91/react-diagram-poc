@@ -7,6 +7,8 @@ import createEngine, {
 import { ConcatNodeFactory } from "./ConcatNodeFactory";
 import { ConcatPortModel } from "./ConcatPortModel";
 import { SimplePortFactory } from "./SimplePortFactory";
+import { store } from "./store";
+import { SetUpdatedLInk } from "./store/appActions";
 
 export class Application {
   protected activeModel: DiagramModel;
@@ -33,12 +35,17 @@ export class Application {
   }
 
   public newModel() {
+    this.activeModel.registerListener({
+      linksUpdated: (link: any) => {
+        let state = store.dispatch(SetUpdatedLInk(link));
+        console.log("LINK updated old", link);
+      },
+    });
     this.diagramEngine.setModel(this.activeModel);
 
     /**
      * registering concat node factory
      */
-
     this.diagramEngine
       .getPortFactories()
       .registerFactory(
@@ -82,6 +89,9 @@ export class Application {
         eventWillFire: (event: any) => {
           // console.log(event);
         },
+        // linksUpdated: (link: any) => {
+        //   console.log("LINK UPDATED", link);
+        // },
       });
     });
   }
