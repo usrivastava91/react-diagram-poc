@@ -37,8 +37,11 @@ export class Application {
   public newModel() {
     this.activeModel.registerListener({
       linksUpdated: (link: any) => {
-        let state = store.dispatch(SetUpdatedLInk(link));
-        console.log("LINK updated old", link);
+        // let state = store.dispatch(SetUpdatedLInk(link));
+        // console.log("LINK updated old", link);
+      },
+      selectionChanged: (event: any) => {
+        console.log("kfhaslkjflkasjflkjaslkfjklsajlkfasjklfjaskljfklasjfklj");
       },
     });
     this.diagramEngine.setModel(this.activeModel);
@@ -84,7 +87,7 @@ export class Application {
            * model.serialize() will return json
            *
            */
-          console.log(this.activeModel.serialize());
+          // console.log(this.activeModel.serialize());
         },
         eventWillFire: (event: any) => {
           // console.log(event);

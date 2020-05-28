@@ -67,7 +67,7 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
               let data = JSON.parse(
                 event.dataTransfer.getData("storm-diagram-node")
               );
-              console.log("datatatatatata", data);
+              // console.log("datatatatatata", data);
 
               //   let nodesCount = _.keys(
               //     this.props.app
@@ -97,6 +97,11 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
 
                 case "concat":
                   node = new ConcatNodeModel();
+                  // node.addListener({
+                  //   selectionChanged: () => {
+                  //     console.log("selectionChanged");
+                  //   },
+                  // });
                   break;
                 default:
                   break;
@@ -106,7 +111,6 @@ export class BodyWidget extends React.Component<BodyWidgetProps> {
                 .getDiagramEngine()
                 .getRelativeMousePoint(event);
               node.setPosition(point);
-
               this.props.app.getDiagramEngine().getModel().addNode(node);
               this.forceUpdate();
             }}

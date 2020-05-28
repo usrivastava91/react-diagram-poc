@@ -44,7 +44,7 @@ export function updatedLinks(state: any = { links: [] }, action: any) {
       console.log("UPDATED LINK PAYLOAD", payload);
       // debugger;
       const newState = { ...state, ...state.links.push(payload) };
-      console.log(newState);
+      // console.log(newState);
       // const newState = { ...state, links.push()};
       return newState;
     }
